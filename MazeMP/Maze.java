@@ -23,7 +23,6 @@ public class Maze extends JPanel{
     public Maze(){
         tiles = new HashMap();
         this.mazeView = this;
-      this.setBackground(Color.black);
     }
     
     //aldous algo
@@ -51,19 +50,16 @@ public class Maze extends JPanel{
         
         //adjacent tiles
         id = 1;
-        for(int i = 0; i < grid_size-1; i++){
-            for(int j = 0; j < grid_size-1; j++){
-              
-                if(id%grid_size != 0 && id < tiles.size()-1-grid_size){
-                    Tile t = tiles.get(id);
-                
-                    if(!t.hasPath(tiles.get(id+1)))
+        for(int i = 0; i < grid_size; i++){
+            for(int j = 0; j < grid_size; j++){
+                Tile t = tiles.get(id);
+                if(j < grid_size-1 && !t.hasPath(tiles.get(id+1))){
                         t.addPath(tiles.get(id+1));
-                    if(!t.hasPath(tiles.get(id+grid_size)))
-                        t.addPath(tiles.get(id+grid_size));
-                
-                    id++;
                 }
+                if(i < grid_size - 1 && !t.hasPath(tiles.get(id+grid_size))){    
+                        t.addPath(tiles.get(id+grid_size));
+                }
+                id++;
             }
         }
        

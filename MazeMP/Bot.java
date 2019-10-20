@@ -34,15 +34,15 @@ public class Bot extends JPanel{
                 t.enterBot(this);
                 break;
            }
-    }
-       
-       
+        }
     }
     
     public void move(Tile t, ArrayList<Tile> percepts){
         this.tile_location = t;
         this.percepts = percepts;
         System.out.println("Bot in Tile number" + this.tile_location.getName());
+        for(Tile tile: percepts)
+            System.out.println("Bot can see " + tile.getName());
     }
     
     
