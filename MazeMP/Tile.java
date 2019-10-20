@@ -24,7 +24,7 @@ public class Tile extends JPanel{
     boolean nonBlockingChange = false;  //allows changing of tile to nonblocking tile
     boolean blockingChange = false;//allows changing of tile to blocking tile
     boolean exitChange = false; //allows changing of tile to exit
-    boolean isVisited;
+    int visit_count;
     boolean isExit = false;
     boolean isBlocking = false;
     Maze maze;
@@ -46,20 +46,17 @@ public class Tile extends JPanel{
        });
        
        paths = new ArrayList();
-       isVisited = false;
+       visit_count = 0;
        
     }
-    
-    public void removePath(Tile t){
-        paths.remove(t);
-    }
+   
     
     public void setBlocking(){
        this.setBackground(Color.black);
        this.repaint();
        this.revalidate();
        this.isBlocking = true;
-      isExit = false;
+       isExit = false;
     }
     
     public void setExit(){
@@ -67,7 +64,6 @@ public class Tile extends JPanel{
          this.repaint();
        this.revalidate();
        this.isExit = true;
-       this.isBlocking = false;
        this.isBlocking = false;
         
     }
@@ -87,17 +83,15 @@ public class Tile extends JPanel{
     }
     
     public void enterBot(Bot b){
-        isVisited = true;
-        b.move(this, paths);
+        this.visit_count++;
+        b.tile_location = this;
         this.add(b);
-        b.setLocation(this.getLocation());
         this.repaint();
         this.revalidate();
     }
     
     public void addPath(Tile t){
-            this.paths.add(t);
-            
+          this.paths.add(t);
           if(!t.hasPath(this))
             t.addPath(this);
         
@@ -109,5 +103,9 @@ public class Tile extends JPanel{
         else if(paths.contains(t))
             return true;
         else return false;
+    }
+    
+    public boolean isVisited(){
+        return this.visit_count > 0;
     }
 }

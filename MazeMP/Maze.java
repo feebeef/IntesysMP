@@ -32,7 +32,7 @@ public class Maze extends JPanel{
     
     //initialize grids lahat may border
     public void createGrid(int grid_size){
-        GridLayout gp = new GridLayout(grid_size, grid_size);
+        GridLayout gp = new GridLayout(0, grid_size);
         mazeView.setLayout(gp);
         
         //map tiles
@@ -98,7 +98,11 @@ public class Maze extends JPanel{
     public static Maze createMaze(){
         return new Maze();
     }
-    
+    public void disableTileEditing(){
+        for(Tile t: tiles.values()){
+           t.removeMouseListener(t.getMouseListeners()[0]);
+        }
+    }
     @Override
     public String toString(){
         return "Maze";
