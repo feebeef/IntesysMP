@@ -33,7 +33,7 @@ public class Bot extends JPanel{
        for(int i = 0; i < percepts.size(); i++){
            t = percepts.get(i);
            if(!t.isVisited() && !t.isBlocking){
-               System.out.println("a path has not yet visited");
+                System.out.println("a path has not yet visited");
                 t.enterBot(this);
                 break;
            }else if(i == percepts.size()-1){
