@@ -12,6 +12,7 @@ public class MazeGenerator extends javax.swing.JFrame {
      Maze m;
      Boolean blockingtile;
      View container;
+     private boolean isDone = false;
      
     public MazeGenerator() {
         initComponents();
@@ -77,6 +78,11 @@ public class MazeGenerator extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelMouseClicked(evt);
+            }
+        });
 
         btnRandom.setText("Random");
         btnRandom.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,6 +164,11 @@ public class MazeGenerator extends javax.swing.JFrame {
         m.enableExitTilePlaceMent();
     }//GEN-LAST:event_btnExitMouseClicked
 
+    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBlock;
@@ -185,6 +196,10 @@ public class MazeGenerator extends javax.swing.JFrame {
     
     public static MazeGenerator showeditor(){
         return new MazeGenerator();
+    }
+    public boolean getIsDone()
+    {
+        return this.isDone;
     }
     
 }

@@ -24,6 +24,7 @@ public class View extends javax.swing.JFrame {
     BufferedImage image;
     Maze m;
     Bot b;
+    int count = -1;
     
     public View() {
         initComponents();
@@ -45,6 +46,8 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        winWindow = new javax.swing.JDialog();
+        jOptionPane1 = new javax.swing.JOptionPane();
         controller = new javax.swing.JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -66,6 +69,17 @@ public class View extends javax.swing.JFrame {
         btnSetBot = new javax.swing.JLabel();
         container = new javax.swing.JScrollPane();
 
+        javax.swing.GroupLayout winWindowLayout = new javax.swing.GroupLayout(winWindow.getContentPane());
+        winWindow.getContentPane().setLayout(winWindowLayout);
+        winWindowLayout.setHorizontalGroup(
+            winWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jOptionPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        winWindowLayout.setVerticalGroup(
+            winWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jOptionPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -79,6 +93,11 @@ public class View extends javax.swing.JFrame {
         btnRun.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/runbtn.png"))); // NOI18N
         btnRun.setText("Run");
+        btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRunMouseClicked(evt);
+            }
+        });
 
         btnStop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/stopbtn.png"))); // NOI18N
@@ -192,7 +211,22 @@ public class View extends javax.swing.JFrame {
 
     private void btnStepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStepMouseClicked
         b.step();
+        count++;
+        txtStep.setText(String.valueOf(count));
+        if(b.getIsDone())
+        {
+            winWindow.setAlwaysOnTop(rootPaneCheckingEnabled);
+            jOptionPane1.showMessageDialog(winWindow, "You Win!");
+        }
     }//GEN-LAST:event_btnStepMouseClicked
+
+    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        b.run();
+        if(b.getIsDone()){
+            winWindow.setAlwaysOnTop(rootPaneCheckingEnabled);
+            jOptionPane1.showMessageDialog(winWindow, "You Win!");
+        }
+    }//GEN-LAST:event_btnRunMouseClicked
 
     /**
      * @param args the command line arguments
@@ -206,7 +240,9 @@ public class View extends javax.swing.JFrame {
     public javax.swing.JScrollPane container;
     private javax.swing.JPanel controller;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel txtStep;
+    private javax.swing.JDialog winWindow;
     // End of variables declaration//GEN-END:variables
     
     public void design(){
