@@ -67,7 +67,7 @@ public class Maze extends JPanel{
    
     
     public void setBot(Bot bot){
-       Tile t = tiles.get(2);
+       Tile t = tiles.get(1);
        t.enterBot(bot);
     }
     

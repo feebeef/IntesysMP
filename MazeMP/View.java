@@ -204,8 +204,7 @@ public class View extends javax.swing.JFrame {
            b = new Bot();
             m.setBot(b);
             b.setSize(100, 100);
-            b.setVisible(true);
-            
+            b.setVisible(true);  
        }
     }//GEN-LAST:event_btnSetBotMouseClicked
 
